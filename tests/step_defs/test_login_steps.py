@@ -31,7 +31,7 @@ def enter_invalid_password(page):
 @when('The user clicks the login button')
 def click_login(page):
     get_login_button(page).click()
-    #page.wait_for_load_state("networkidle")
+
 
 @then('The user should be redirected to the account page')
 def verify_account_page(page):

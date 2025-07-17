@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="3" time="14.011" timestamp="2025-07-15T20:26:27.557080+05:30" hostname="INBOOK_X1_NEO"><testcase classname="tests.step_defs.test_login_steps" name="test_c2313__successful_login_with_valid_credentials" time="6.697"><failure message="AssertionError: assert 'Delete Account' == 'Logout'&#10;  &#10;  #x1B[0m#x1B[91m- Logout#x1B[39;49;00m#x1B[90m#x1B[39;49;00m&#10;  #x1B[92m+ Delete Account#x1B[39;49;00m#x1B[90m#x1B[39;49;00m">fixturefunc = &lt;function verify_account_page at 0x00000140626DFD80&gt;
+request = &lt;FixtureRequest for &lt;Function test_c2313__successful_login_with_valid_credentials&gt;&gt;
+kwargs = {'page': &lt;Page url='https://automationexercise.com/'&gt;}
+
+    def call_fixture_func(
+        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs
+    ) -&gt; FixtureValue:
+        if inspect.isgeneratorfunction(fixturefunc):
+            fixturefunc = cast(Callable[..., Generator[FixtureValue]], fixturefunc)
+            generator = fixturefunc(**kwargs)
+            try:
+                fixture_result = next(generator)
+            except StopIteration:
+                raise ValueError(f"{request.fixturename} did not yield a value") from None
+            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)
+            request.addfinalizer(finalizer)
+        else:
+            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)
+&gt;           fixture_result = fixturefunc(**kwargs)
+                             ^^^^^^^^^^^^^^^^^^^^^
+
+venv\Lib\site-packages\_pytest\fixtures.py:929: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+page = &lt;Page url='https://automationexercise.com/'&gt;
+
+    @then('The user should be redirected to the account page')
+    def verify_account_page(page):
+&gt;       assert get_home_button(page).inner_text().strip() == "Logout"
+E       AssertionError: assert 'Delete Account' == 'Logout'
+E         
+E         #x1B[0m#x1B[91m- Logout#x1B[39;49;00m#x1B[90m#x1B[39;49;00m
+E         #x1B[92m+ Delete Account#x1B[39;49;00m#x1B[90m#x1B[39;49;00m
+
+tests\step_defs\test_login_steps.py:38: AssertionError</failure></testcase><testcase classname="tests.step_defs.test_login_steps" name="test_c2314__unsuccessful_login_with_invalid_email" time="3.501" /><testcase classname="tests.step_defs.test_login_steps" name="test_c2315__unsuccessful_login_with_invalid_password" time="3.654" /></testsuite></testsuites>

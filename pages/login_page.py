@@ -11,7 +11,7 @@ def get_login_button(page):
     return page.locator("[data-qa='login-button']")
 
 def get_home_button(page):
-    return page.locator("header li:nth-child(4)")
+    return page.locator("header li:nth-child(5)")
 
 def get_error_message(page):
     return page.locator("form > input+p")

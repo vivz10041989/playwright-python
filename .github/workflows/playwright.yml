@@ -1,0 +1,48 @@
+name: Run Playwright Tests with TestRail Integration and Email
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+        playwright install
+
+    - name: Run Playwright Tests
+      run: pytest tests/
+
+    - name: Report to TestRail
+      if: always()
+      run: python testrail/testrail_reporter.py
+      env:
+        TESTRAIL_USER: ${{ secrets.TESTRAIL_USER }}
+        TESTRAIL_PASSWORD: ${{ secrets.TESTRAIL_PASSWORD }}
+        TESTRAIL_RUN_NAME: "CI Run - ${{ github.run_id }}"
+        TESTRAIL_PROJECT_ID: ${{ secrets.TESTRAIL_PROJECT_ID }}
+        TESTRAIL_SUITE_ID: ${{ secrets.TESTRAIL_SUITE_ID }}
+
+    - name: Send Email Notification
+      if: always()
+      run: python utils/notify_email.py
+      env:
+        EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        EMAIL_RECEIVER: ${{ secrets.EMAIL_RECEIVER }}
+        GITHUB_STATUS: ${{ job.status }}
+        GITHUB_RUN_URL: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        TESTRAIL_RUN_URL: ${{ env.TESTRAIL_RUN_URL }}
