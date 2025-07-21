@@ -30,11 +30,11 @@ jobs:
       if: always()
       run: python testrail_reporter.py
       env:
-        TESTRAIL_USER: ${{ secrets.TESTRAIL_USER }}
-        TESTRAIL_PASSWORD: ${{ secrets.TESTRAIL_PASSWORD }}
-        TESTRAIL_RUN_NAME: "CI Run - ${{ github.run_id }}"
+        TESTRAIL_USERNAME: ${{ secrets.TESTRAIL_USERNAME }}
+        TESTRAIL_URL: ${{ secrets.TESTRAIL_URL }}
+        TESTRAIL_API_KEY: ${{ secrets.TESTRAIL_API_KEY }}
         TESTRAIL_PROJECT_ID: ${{ secrets.TESTRAIL_PROJECT_ID }}
-        TESTRAIL_SUITE_ID: ${{ secrets.TESTRAIL_SUITE_ID }}
+        #TESTRAIL_SUITE_ID: ${{ secrets.TESTRAIL_SUITE_ID }}
 
     - name: Send Email Notification
       if: always()
