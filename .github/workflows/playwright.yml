@@ -28,13 +28,13 @@ jobs:
 
     - name: Report to TestRail
       if: always()
-      run: python testrail/testrail_reporter.py
+      run: python testrail_reporter.py
       env:
         TESTRAIL_USER: ${{ secrets.TESTRAIL_USER }}
         TESTRAIL_PASSWORD: ${{ secrets.TESTRAIL_PASSWORD }}
         TESTRAIL_RUN_NAME: "CI Run - ${{ github.run_id }}"
-        TESTRAIL_PROJECT_ID: ${{ secrets.TESTRAIL_PROJECT_ID }}
-        TESTRAIL_SUITE_ID: ${{ secrets.TESTRAIL_SUITE_ID }}
+        #TESTRAIL_PROJECT_ID: ${{ secrets.TESTRAIL_PROJECT_ID }}
+        #TESTRAIL_SUITE_ID: ${{ secrets.TESTRAIL_SUITE_ID }}
 
     - name: Send Email Notification
       if: always()
