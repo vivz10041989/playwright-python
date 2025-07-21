@@ -38,7 +38,7 @@ jobs:
 
     - name: Send Email Notification
       if: always()
-      run: python utils/notify_email.py
+      run: python utils/email_notify.py
       env:
         EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
         EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
