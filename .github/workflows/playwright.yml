@@ -45,4 +45,4 @@ jobs:
         EMAIL_RECEIVER: ${{ secrets.EMAIL_RECEIVER }}
         GITHUB_STATUS: ${{ job.status }}
         GITHUB_RUN_URL: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-        TESTRAIL_RUN_URL: ${{ env.TESTRAIL_RUN_URL }}
+        TESTRAIL_RUN_URL: "${{ secrets.TESTRAIL_URL }}index.php?/runs/overview/${{ secrets.TESTRAIL_PROJECT_ID}}"
