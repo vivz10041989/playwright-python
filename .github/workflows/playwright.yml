@@ -24,7 +24,7 @@ jobs:
         playwright install
 
     - name: Run Playwright Tests
-      run: pytest tests/
+      run: pytest tests/ --junitxml=results.xml
 
     - name: Report to TestRail
       if: always()
